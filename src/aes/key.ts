@@ -13,7 +13,7 @@ const exportCryptoKey = async (key: CryptoKey) => {
   return exportedKeyBuffer;
 };
 
-const GenerateAESKey = async (AesName: string, keySize: number) => {
+const GenerateAESKey = async (AesName: string, keySize: number, exportType: string) => {
   let key = await window.crypto.subtle.generateKey(
     {
       name: AesName,
@@ -25,9 +25,12 @@ const GenerateAESKey = async (AesName: string, keySize: number) => {
 
   const byteKey = await exportCryptoKey(key);
 
-  // return ByteArrayToHexString(byteKey)
-
-  var b64encoded = Uint8ToString(byteKey);
+  let b64encoded = '';
+  if (exportType == 'base64') {
+    b64encoded = Uint8ToString(byteKey);
+  } else if (exportType == 'hex') {
+    b64encoded = ByteArrayToHexString(byteKey);
+  }
 
   return b64encoded;
 };

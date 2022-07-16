@@ -8,16 +8,21 @@ const ByteArrayToHexString = (byteArray: Uint8Array) => {
   }).join('');
 };
 
-const GenerateEd25519KeyPair = async () => {
+const GenerateEd25519KeyPair = async (exportType: string) => {
   let privateObj = ed.utils.randomPrivateKey();
 
   let pubkeyObj = await ed.getPublicKey(privateObj);
 
-  // let PrivateKey = ByteArrayToHexString(privateObj);
-  // let PublicKey = ByteArrayToHexString(pubkeyObj);
+  let PrivateKey = '',
+    PublicKey = '';
 
-  let PrivateKey = Uint8ToString(privateObj);
-  let PublicKey = Uint8ToString(pubkeyObj);
+  if (exportType == 'base64') {
+    PrivateKey = Uint8ToString(privateObj);
+    PublicKey = Uint8ToString(pubkeyObj);
+  } else if ((exportType = 'hex')) {
+    PrivateKey = ByteArrayToHexString(privateObj);
+    PublicKey = ByteArrayToHexString(pubkeyObj);
+  }
 
   return {
     PrivateKey,

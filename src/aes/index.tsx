@@ -12,8 +12,20 @@ const AESApp = () => {
   const [keySize, setKeySize] = useState('256');
   const [AesName, setAesName] = useState('AES-GCM');
 
+  const [exportType, setExportType] = useState('base64');
+
+  const clickGenerateBase64KeyButton = async () => {
+    setExportType('base64');
+    await clickGenerateKeyButton();
+  };
+
+  const clickGenerateHexKeyButton = async () => {
+    setExportType('hex');
+    await clickGenerateKeyButton();
+  };
+
   const clickGenerateKeyButton = async () => {
-    const key = await GenerateAESKey(AesName, parseInt(keySize));
+    const key = await GenerateAESKey(AesName, parseInt(keySize), exportType);
     setAESKey(key);
   };
 
@@ -34,6 +46,7 @@ const AESApp = () => {
 
   return (
     <div>
+      <h2>Generate key pair</h2>
       <p>
         <Radio.Group value={AesName} onChange={(e) => setAesName(e.target.value)}>
           <Radio.Button value="AES-GCM" checked={true}>
@@ -51,10 +64,13 @@ const AESApp = () => {
           </Radio.Button>
         </Radio.Group>
       </p>
-      <Button type="primary" onClick={clickGenerateKeyButton}>
-        Generate key pair
+      <Button type="primary" onClick={clickGenerateHexKeyButton}>
+        hex encode
       </Button>
-
+      &nbsp;&nbsp;
+      <Button type="primary" onClick={clickGenerateBase64KeyButton}>
+        base64 encode
+      </Button>
       {keyRenderData}
     </div>
   );

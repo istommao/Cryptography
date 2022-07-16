@@ -1,9 +1,9 @@
 ---
 hero:
-  title: cryptography
-  desc: cryptography notes example
+  title: 密码学了吗
+  desc: 📒 密码学笔记
   actions:
-    - text: Getting Started
+    - text: 开始
       link: /docs
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
@@ -18,7 +18,7 @@ features:
 footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](https://d.umijs.org)
 ---
 
-## Hello cryptography!
+## Hello 密码学!
 
 - AES
 - RSA

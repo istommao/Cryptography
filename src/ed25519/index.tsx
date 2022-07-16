@@ -9,9 +9,20 @@ import { GenerateEd25519KeyPair } from './key';
 const Ed25519App = () => {
   const [pubkey, setPubkey] = useState('');
   const [privatekey, setPrivatekey] = useState('');
+  const [exportType, setExportType] = useState('base64');
+
+  const clickGenerateHexKeyButton = async () => {
+    setExportType('hex');
+    await clickGenerateKeyButton();
+  };
+
+  const clickGenerateBase64KeyButton = async () => {
+    setExportType('base64');
+    await clickGenerateKeyButton();
+  };
 
   const clickGenerateKeyButton = async () => {
-    const result = await GenerateEd25519KeyPair();
+    const result = await GenerateEd25519KeyPair(exportType);
     console.log(result);
     setPrivatekey(result.PrivateKey);
     setPubkey(result.PublicKey);
@@ -38,10 +49,14 @@ const Ed25519App = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={clickGenerateKeyButton}>
-        Generate Ed25519 key pair
+      <h2>Generate Ed25519 key</h2>
+      <Button type="primary" onClick={clickGenerateHexKeyButton}>
+        Generate hex encode
       </Button>
-
+      &nbsp;&nbsp;
+      <Button type="primary" onClick={clickGenerateBase64KeyButton}>
+        Generate base64 encode
+      </Button>
       {keyRenderData}
     </div>
   );
