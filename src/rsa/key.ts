@@ -11,12 +11,12 @@ const GetRSAPEMData = (buffer: any) => {
   return text;
 };
 
-const GenerateRsaKeyPair = async () => {
+const GenerateRsaKeyPair = async (keySize: number, hashMethod: string) => {
   let algorithmOps = {
     name: 'RSA-OAEP',
-    modulusLength: 2048,
+    modulusLength: keySize,
     publicExponent: new Uint8Array([1, 0, 1]),
-    hash: 'SHA-512',
+    hash: hashMethod,
   };
 
   const key = await window.crypto.subtle.generateKey(
@@ -35,5 +35,3 @@ const GenerateRsaKeyPair = async () => {
 };
 
 export { GenerateRsaKeyPair };
-
-// const { privateKey, publicKey } = await GenerateRsaKeyPair();

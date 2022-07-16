@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { Button, Modal } from 'antd';
+import { Button, Input } from 'antd';
+
+const { TextArea } = Input;
 
 import { GenerateEd25519KeyPair } from './key';
 
@@ -21,9 +23,13 @@ const Ed25519App = () => {
     keyRenderData = (
       <div>
         <h2>Pubkey: </h2>
-        <p>{pubkey}</p>
+        <p>
+          <TextArea showCount value={pubkey} style={{ height: 120 }} />
+        </p>
         <h2>Privatekey: </h2>
-        <p>{privatekey}</p>
+        <p>
+          <TextArea showCount value={privatekey} style={{ height: 120 }} />
+        </p>
       </div>
     );
   } else {
