@@ -1,6 +1,6 @@
 export { default as App } from './rsa';
-export { default as Ed25519App } from './ed25519';
+export { Ed25519App, Ed25519SignatureApp } from './ed25519';
 
-export { default as AESApp } from './aes';
+export { AESApp } from './aes';
 
 import 'antd/dist/antd.less';

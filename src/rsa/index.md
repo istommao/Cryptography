@@ -3,8 +3,8 @@ nav:
   title: docs
   path: /docs
 group:
-  title: Crypto
-title: RSA
+  title: RSA
+title: Generate key pair
 order: 2
 ---
 

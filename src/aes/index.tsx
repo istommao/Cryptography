@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-import { Button, Input, Radio } from 'antd';
+import { Button, Input, Radio, Typography } from 'antd';
 
 import { GenerateAESKey } from './key';
+
+const { Title, Paragraph, Text, Link } = Typography;
 
 const { TextArea } = Input;
 
@@ -12,19 +14,17 @@ const AESApp = () => {
   const [keySize, setKeySize] = useState('256');
   const [AesName, setAesName] = useState('AES-GCM');
 
-  const [exportType, setExportType] = useState('base64');
-
   const clickGenerateBase64KeyButton = async () => {
-    setExportType('base64');
-    await clickGenerateKeyButton();
+    const exportType = 'base64';
+    await clickGenerateKeyButton(exportType);
   };
 
   const clickGenerateHexKeyButton = async () => {
-    setExportType('hex');
-    await clickGenerateKeyButton();
+    const exportType = 'hex';
+    await clickGenerateKeyButton(exportType);
   };
 
-  const clickGenerateKeyButton = async () => {
+  const clickGenerateKeyButton = async (exportType: string) => {
     const key = await GenerateAESKey(AesName, parseInt(keySize), exportType);
     setAESKey(key);
   };
@@ -35,9 +35,9 @@ const AESApp = () => {
     keyRenderData = (
       <div>
         <h2>Key: </h2>
-        <p>
+        <Paragraph>
           <TextArea showCount value={AESKey} style={{ height: 120 }} />
-        </p>
+        </Paragraph>
       </div>
     );
   } else {
@@ -47,7 +47,7 @@ const AESApp = () => {
   return (
     <div>
       <h2>Generate key pair</h2>
-      <p>
+      <Paragraph>
         <Radio.Group value={AesName} onChange={(e) => setAesName(e.target.value)}>
           <Radio.Button value="AES-GCM" checked={true}>
             AES-GCM
@@ -55,15 +55,16 @@ const AESApp = () => {
           <Radio.Button value="AES-CTR">AES-CTR</Radio.Button>
           <Radio.Button value="AES-CBC">AES-CBC</Radio.Button>
         </Radio.Group>
-      </p>
-      <p>
+      </Paragraph>
+      <Paragraph>
         <Radio.Group value={keySize} onChange={(e) => setKeySize(e.target.value)}>
           <Radio.Button value="128">128</Radio.Button>
+          <Radio.Button value="192">192</Radio.Button>
           <Radio.Button value="256" checked={true}>
             256
           </Radio.Button>
         </Radio.Group>
-      </p>
+      </Paragraph>
       <Button type="primary" onClick={clickGenerateHexKeyButton}>
         hex encode
       </Button>
@@ -76,4 +77,4 @@ const AESApp = () => {
   );
 };
 
-export default AESApp;
+export { AESApp };

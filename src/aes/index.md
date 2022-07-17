@@ -3,10 +3,10 @@ nav:
   title: docs
   path: /docs
 group:
-  title: Crypto
+  title: AES
   order: 0
 order: 0
-title: AES
+title: Generate key
 ---
 
 ## AES Playground

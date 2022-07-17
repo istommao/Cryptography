@@ -3,10 +3,10 @@ nav:
   title: docs
   path: /docs
 group:
-  title: Crypto
+  title: ED25519
   order: 0
 order: 3
-title: Ed25519
+title: Generate key pair
 ---
 
 ## Ed25519 Playground
