@@ -2,4 +2,4 @@
 
 ## Getting Started
 
-![screenshot.png](screenshot.png)
+![screenshot2.png](screenshot2.png)
