@@ -1,10 +1,4 @@
-import { Uint8ToString } from '../utils/base64';
-
-const ByteArrayToHexString = (byteArray: Uint8Array) => {
-  return Array.from(byteArray, function (byte) {
-    return ('0' + (byte & 0xff).toString(16)).slice(-2);
-  }).join('');
-};
+import { ByteArrayToHexString, Uint8ToBase64String } from '../utils/codec';
 
 const exportCryptoKey = async (key: CryptoKey) => {
   const exported = await window.crypto.subtle.exportKey('raw', key);
@@ -25,14 +19,46 @@ const GenerateAESKey = async (AesName: string, keySize: number, exportType: stri
 
   const byteKey = await exportCryptoKey(key);
 
-  let b64encoded = '';
+  let encoded = '';
   if (exportType == 'base64') {
-    b64encoded = Uint8ToString(byteKey);
+    encoded = Uint8ToBase64String(byteKey);
   } else if (exportType == 'hex') {
-    b64encoded = ByteArrayToHexString(byteKey);
+    encoded = ByteArrayToHexString(byteKey);
   }
 
-  return b64encoded;
+  return encoded;
 };
 
-export { GenerateAESKey };
+const importSecretKey = async (rawKey: any, aesName: string) => {
+  return await window.crypto.subtle.importKey('raw', rawKey, aesName, true, ['encrypt', 'decrypt']);
+};
+
+const AesEncrypt = async (aesName: string, keyStr: any, keySize: number, iv: any, encoded: any) => {
+  const alg = {
+    name: aesName,
+    iv: iv,
+    length: keySize,
+  };
+
+  let key = await importSecretKey(keyStr, aesName);
+
+  let result = await window.crypto.subtle.encrypt(alg, key, encoded);
+
+  return result;
+};
+
+const AesDecrypt = async (aesName: string, keyStr: any, keySize: number, iv: any, encoded: any) => {
+  const alg = {
+    name: aesName,
+    iv: iv,
+    length: keySize,
+  };
+
+  let key = await importSecretKey(keyStr, aesName);
+
+  let result = await window.crypto.subtle.decrypt(alg, key, encoded);
+
+  return result;
+};
+
+export { GenerateAESKey, AesEncrypt, AesDecrypt };

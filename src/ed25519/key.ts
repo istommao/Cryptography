@@ -1,6 +1,6 @@
 // Common.js and ECMAScript Modules (ESM)
 import * as ed from '@noble/ed25519';
-import { Uint8ToString } from '../utils/base64';
+import { Uint8ToBase64String } from '../utils/codec';
 
 const HexStringToUint8Array = (hexString: string) => {
   if (hexString.length % 2 !== 0) {
@@ -35,8 +35,8 @@ const GenerateEd25519KeyPair = async (exportType: string) => {
     PublicKey = '';
 
   if (exportType == 'base64') {
-    PrivateKey = Uint8ToString(privateObj);
-    PublicKey = Uint8ToString(pubkeyObj);
+    PrivateKey = Uint8ToBase64String(privateObj);
+    PublicKey = Uint8ToBase64String(pubkeyObj);
   } else if ((exportType = 'hex')) {
     PrivateKey = ByteArrayToHexString(privateObj);
     PublicKey = ByteArrayToHexString(pubkeyObj);

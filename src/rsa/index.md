@@ -12,9 +12,9 @@ order: 2
 
 ```tsx
 import React from 'react';
-import { App } from 'cryptography';
+import { RsaApp } from 'cryptography';
 
-export default () => <App />;
+export default () => <RsaApp />;
 ```
 
 ## RSA Code Demo
