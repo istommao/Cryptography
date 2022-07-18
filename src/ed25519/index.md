@@ -18,7 +18,7 @@ import { Ed25519App } from 'cryptography';
 export default () => <Ed25519App />;
 ```
 
-## Ed25519 Code Demo
+### JavaScript CodeDemo
 
 ```bash
 yarn add @noble/ed25519
@@ -49,3 +49,7 @@ const GenerateEd25519KeyPair = async () => {
   };
 };
 ```
+
+### Python CodeDemo
+
+<embed src="../code/ed25519_python.md"></embed>
