@@ -9,6 +9,8 @@ const { Title, Paragraph, Text, Link } = Typography;
 
 const { TextArea } = Input;
 
+import { Uint8ToBase64String } from '../utils/codec';
+
 const AesEncryptionApp = () => {
   const [AesIVHex, setAesIVHex] = useState('');
 
@@ -77,7 +79,9 @@ const AesEncryptionApp = () => {
 
     let iv = HexStringToUint8Array(AesIVHex);
     let byteData = await AesEncrypt(AesName, key, parseInt(keySize), iv, inputData);
-    let result = ByteArrayToHexString(new Uint8Array(byteData));
+    // let result = ByteArrayToHexString(new Uint8Array(byteData));
+
+    let result = Uint8ToBase64String(new Uint8Array(byteData));
 
     setEncodeData(result);
   };

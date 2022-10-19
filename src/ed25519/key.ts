@@ -38,8 +38,9 @@ const GenerateEd25519KeyPair = async (exportType: string) => {
     PrivateKey = Uint8ToBase64String(privateObj);
     PublicKey = Uint8ToBase64String(pubkeyObj);
   } else if ((exportType = 'hex')) {
-    PrivateKey = ByteArrayToHexString(privateObj);
-    PublicKey = ByteArrayToHexString(pubkeyObj);
+    // PrivateKey = ByteArrayToHexString(privateObj);
+    PrivateKey = ed.utils.bytesToHex(privateObj);
+    PublicKey = ed.utils.bytesToHex(pubkeyObj);
   }
 
   return {
@@ -60,7 +61,23 @@ const Ed25519Verify = async (pubKey: Hex, signature: Hex, message: Hex) => {
   return isValid;
 };
 
+const GetShareKeyResult = async (privateKeyA, pubKeyB) => {
+  const shared = await ed.getSharedSecret(privateKeyA, pubKeyB);
+  return ByteArrayToHexString(shared);
+};
+
+const SharedKeyTest = async (privateKeyA, pubkeyA, privateKeyB, pubKeyB) => {
+  // const pub = ed.curve25519.scalarMultBase(privateKey);
+  const sharedA = await ed.getSharedSecret(privateKeyA, pubKeyB);
+
+  const sharedB = await ed.getSharedSecret(privateKeyB, pubkeyA);
+  console.log(ByteArrayToHexString(sharedA));
+  console.log(ByteArrayToHexString(sharedB));
+};
+
 export {
+  GetShareKeyResult,
+  SharedKeyTest,
   GenerateEd25519KeyPair,
   Ed25519Sign,
   Ed25519Verify,
