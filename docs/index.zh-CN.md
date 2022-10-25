@@ -20,6 +20,8 @@ footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](http
 
 ## Hello 密码学!
 
+- HASH
 - AES
 - RSA
 - ED25519
+- HKDF
