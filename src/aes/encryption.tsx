@@ -5,11 +5,13 @@ import { Button, Input, Radio, Typography } from 'antd';
 import { AesDecrypt, AesEncrypt, GenerateAESKey } from './key';
 import { ByteArrayToHexString, HexStringToUint8Array } from '../ed25519/key';
 
+import { aesGCMEncrypt, aesGCMDecrypt } from './testkey';
+
 const { Title, Paragraph, Text, Link } = Typography;
 
 const { TextArea } = Input;
 
-import { Uint8ToBase64String } from '../utils/codec';
+import { Uint8ToBase64String, Base64StringToUint8 } from '../utils/codec';
 
 const AesEncryptionApp = () => {
   const [AesIVHex, setAesIVHex] = useState('');
@@ -27,6 +29,47 @@ const AesEncryptionApp = () => {
     await clickGenerateKeyButton(exportType);
 
     UpdateHexIV();
+
+    // // test
+    // let inputData = new TextEncoder().encode("hello")
+    // let key = Base64StringToUint8("Sv5ZTZ1dXfP5RlFkBwuph+vUASGLoNwERwt4CIn8Qps=")
+    // let iv = Base64StringToUint8("Sv5ZTZ1dXfP5RlFk")
+    // let byteData = await AesEncrypt("AES-GCM", key, 256, iv, inputData);
+
+    let bytex = Base64StringToUint8(
+      'B+cKT7G0zVZYzTAwIkCB5pRljRGkLJMJdiTreCFinEFmFO2tuBjCyoe727C8AsfItwMfuULr2CrzY21hHeYcafdomXcR5jhLJeNvnf9MIuCeEv7CWyCpEfj+OL+nbuzoZK5t3R/n2ZH2/Od1awXKORw9/8gzKiKFwTJM7iHi+1uNVCXi5TPfIB/fQ+0OFrXYxerex7L5WkuF+gG4cJ2SapQqbPOfz+qla258IckTfbm9f6dll4TNR+bXurxyD/U=',
+    );
+
+    let de = await aesGCMDecrypt(
+      'KW9Ni2erBboTKeDg05PdkIYJLIpGlLErVeNP9XrRhcc=',
+      'KW9Ni2erBboTKeDg',
+      bytex,
+    );
+    console.log('===', JSON.parse(new TextDecoder().decode(new Uint8Array(de))));
+
+    // let key = Base64StringToUint8("KW9Ni2erBboTKeDg05PdkIYJLIpGlLErVeNP9XrRhcc=")
+    // let iv = Base64StringToUint8("KW9Ni2erBboTKeDg")
+
+    // let inputData = bytex
+
+    // let result2 = await AesEncrypt("AES-GCM", key, 256, iv, new Uint8Array(de));
+    // console.log("result2", Uint8ToBase64String(new Uint8Array(result2)))
+
+    // console.log("de===: ", JSON.parse(new TextDecoder().decode(de)))
+
+    // let result = Uint8ToBase64String(new Uint8Array(byteData));
+    // console.log("result:", result)
+
+    // // let decode_data = await aesGCMDecrypt(key, iv, Base64StringToUint8(base64_str))
+    // // let plain_text = new TextDecoder().decode(decode_data)
+    // // console.log(plain_text)
+
+    // let de = await aesGCMDecrypt("Sv5ZTZ1dXfP5RlFkBwuph+vUASGLoNwERwt4CIn8Qps=", "Sv5ZTZ1dXfP5RlFk", new Uint8Array(byteData))
+    // console.log("de: ", new TextDecoder().decode(de))
+
+    // let result2 = await  aesGCMEncrypt("Sv5ZTZ1dXfP5RlFkBwuph+vUASGLoNwERwt4CIn8Qps=", "Sv5ZTZ1dXfP5RlFk", inputData);
+    // console.log("result2:", Uint8ToBase64String(new Uint8Array(result2)))
+    // console.log("result2:", btoa(new Uint8Array(result2)))
   };
 
   const clickGenerateHexKeyButton = async () => {

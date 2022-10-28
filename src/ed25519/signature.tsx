@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Input, Typography, message } from 'antd';
+import { Button, Input, Typography, message, Radio } from 'antd';
 const { Title, Paragraph, Text, Link } = Typography;
 
 const { TextArea } = Input;
@@ -12,8 +12,11 @@ import {
   HexStringToUint8Array,
   Ed25519Verify,
 } from './key';
+import { Base64StringToUint8, Base64ToHex, HexToBase64, Uint8ToBase64String } from '../utils/codec';
 
 const Ed25519SignatureApp = () => {
+  const [outputFormat, setOutputFormat] = useState('base64');
+
   const [originalText, setOriginalText] = useState('');
   const [signature, setSignature] = useState('');
 
@@ -42,19 +45,35 @@ const Ed25519SignatureApp = () => {
   });
 
   const clickSigningButton = async () => {
-    const sigStr = await Ed25519Sign(privatekey, new TextEncoder().encode(originalText));
+    const sigeBytes = await Ed25519Sign(privatekey, new TextEncoder().encode(originalText));
 
-    setSignature(ByteArrayToHexString(sigStr));
+    let signatureStr =
+      outputFormat == 'base64' ? Uint8ToBase64String(sigeBytes) : ByteArrayToHexString(sigeBytes);
+    setSignature(signatureStr);
+  };
+
+  const changeOutputFormat = (format: string) => {
+    if (outputFormat === format) {
+      return;
+    }
+
+    if (outputFormat === 'base64') {
+      setSignature(Base64ToHex(signature));
+    } else {
+      setSignature(HexToBase64(signature));
+    }
+
+    setOutputFormat(format);
   };
 
   const clickVerifyButton = async () => {
     let isValid;
+
+    let signBytes =
+      outputFormat === 'base64' ? Base64StringToUint8(signature) : HexStringToUint8Array(signature);
+
     try {
-      isValid = await Ed25519Verify(
-        pubkey,
-        HexStringToUint8Array(signature),
-        new TextEncoder().encode(originalText),
-      );
+      isValid = await Ed25519Verify(pubkey, signBytes, new TextEncoder().encode(originalText));
     } catch {
       isValid = false;
     }
@@ -99,6 +118,15 @@ const Ed25519SignatureApp = () => {
         <Button type="primary" onClick={clickVerifyButton}>
           Verify signature
         </Button>
+        &nbsp;&nbsp;
+        <Radio.Group defaultValue={outputFormat} buttonStyle="solid">
+          <Radio.Button value="base64" onClick={() => changeOutputFormat('base64')}>
+            Base64 Format
+          </Radio.Button>
+          <Radio.Button value="hex" onClick={() => changeOutputFormat('hex')}>
+            HEX Format
+          </Radio.Button>
+        </Radio.Group>
       </Paragraph>
 
       <Paragraph>
