@@ -105,8 +105,8 @@ function fromHexString(hex: any) {
 
 const GetAESBase64Key = async (hex_key: string) => {
   let master_key = await crypto.subtle.importKey(
-    // @ts-ignore
     'raw',
+    // @ts-ignore
     fromHexString(hex_key),
     'HKDF',
     false,
