@@ -1,7 +1,4 @@
 ---
-nav:
-  title: docs
-  path: /docs
 group:
   title: ED25519
   order: 0

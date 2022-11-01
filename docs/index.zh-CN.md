@@ -4,7 +4,7 @@ hero:
   desc: 📒 密码学笔记
   actions:
     - text: 开始
-      link: /docs
+      link: /playground/hash
 features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
     title: Online Demo
@@ -20,8 +20,44 @@ footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](http
 
 ## Hello 密码学!
 
-- HASH
-- AES
-- RSA
-- ED25519
-- HKDF
+- Hash
+  - MD5
+  - SHA1
+  - SHA2
+  - SHA3
+- Authenticated encryption
+  - AES
+  - ChaCha20Poly1305
+- Asymmetric algorithms
+  - Ed25519 signing
+  - X25519 key exchange
+  - X448 key exchange
+  - Elliptic curve cryptography
+  - RSA
+  - Diffie-Hellman key exchange
+  - DSA
+- Key derivation functions
+  - PBKDF2
+  - ConcatKDF
+  - HKDF
+  - KBKDF
+  - X963KDF
+
+### Languages
+
+- Python
+- JavaScript
+- Golang
+
+---
+
+### Python cryptography lib
+
+- Cryptography pyca
+  - Docs https://cryptography.io/
+  - Github https://github.com/pyca/cryptography
+
+### Golang cryptography lib
+
+- crypto golang standard library
+  - Package crypto collects common cryptographic constants

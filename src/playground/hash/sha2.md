@@ -1,21 +1,18 @@
 ---
-nav:
-  title: docs
-  path: /docs
 group:
   title: Hash
   order: 0
 order: 3
-title: MD5
+title: SHA2
 ---
 
-# MD5 Hash
+# SHA2 Hash
 
 ```tsx
 import React from 'react';
-import { MD5App } from 'cryptography';
+import { SHA2App } from 'cryptography';
 
-export default () => <MD5App />;
+export default () => <SHA2App />;
 ```
 
 ## JavaScript CodeDemo

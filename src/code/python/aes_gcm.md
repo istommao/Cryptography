@@ -1,12 +1,9 @@
 ---
-nav:
-  title: code
-  path: /code
 group:
-  title: AES python
+  title: Python
   order: 0
 order: 3
-title: AES python
+title: AES GCM
 ---
 
 # AES python

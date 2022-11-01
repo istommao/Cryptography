@@ -1,3 +1,11 @@
+---
+group:
+  title: Python
+  order: 0
+order: 3
+title: Ed25519
+---
+
 ```bash
 pip install cryptography
 ```

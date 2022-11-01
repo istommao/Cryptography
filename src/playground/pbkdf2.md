@@ -1,7 +1,4 @@
 ---
-nav:
-  title: docs
-  path: /docs
 group:
   title: PBKDF2
   order: 0

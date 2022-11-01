@@ -1,7 +1,4 @@
 ---
-nav:
-  title: docs
-  path: /docs
 group:
   title: RSA
 title: Generate key pair

@@ -1,7 +1,4 @@
 ---
-nav:
-  title: docs
-  path: /docs
 group:
   title: ED25519
   order: 0
@@ -50,6 +47,8 @@ const GenerateEd25519KeyPair = async () => {
 };
 ```
 
+<!--
 ### Python CodeDemo
 
-<embed src="../code/ed25519_python.md"></embed>
+<embed src="../code/python/ed25519_python.md"></embed>
+ -->
