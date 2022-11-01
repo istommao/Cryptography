@@ -1,6 +1,6 @@
 // Common.js and ECMAScript Modules (ESM)
 import * as ed from '@noble/ed25519';
-import { Uint8ToBase64String } from '../utils/codec';
+import { Uint8ToBase64String } from '../../utils/codec';
 
 const HexStringToUint8Array = (hexString: string) => {
   if (hexString.length % 2 !== 0) {

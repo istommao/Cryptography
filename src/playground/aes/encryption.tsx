@@ -11,7 +11,7 @@ const { Title, Paragraph, Text, Link } = Typography;
 
 const { TextArea } = Input;
 
-import { Uint8ToBase64String, Base64StringToUint8 } from '../utils/codec';
+import { Uint8ToBase64String, Base64StringToUint8 } from '../../utils/codec';
 
 const AesEncryptionApp = () => {
   const [AesIVHex, setAesIVHex] = useState('');

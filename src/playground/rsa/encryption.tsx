@@ -5,7 +5,7 @@ import { Button, Input, Radio, Typography, message } from 'antd';
 const { Title, Paragraph, Text, Link } = Typography;
 
 import { GenerateRsaKeyPair, getRsaEncryptData, getRsaDecryptData } from './key';
-import { Base64StringToUint8, Uint8ToBase64String } from '../utils/codec';
+import { Base64StringToUint8, Uint8ToBase64String } from '../../utils/codec';
 
 const { TextArea } = Input;
 

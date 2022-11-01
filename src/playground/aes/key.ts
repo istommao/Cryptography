@@ -1,4 +1,4 @@
-import { ByteArrayToHexString, Uint8ToBase64String } from '../utils/codec';
+import { ByteArrayToHexString, Uint8ToBase64String } from '../../utils/codec';
 
 const exportCryptoKey = async (key: CryptoKey) => {
   const exported = await window.crypto.subtle.exportKey('raw', key);

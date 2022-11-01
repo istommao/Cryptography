@@ -12,7 +12,12 @@ import {
   HexStringToUint8Array,
   Ed25519Verify,
 } from './key';
-import { Base64StringToUint8, Base64ToHex, HexToBase64, Uint8ToBase64String } from '../utils/codec';
+import {
+  Base64StringToUint8,
+  Base64ToHex,
+  HexToBase64,
+  Uint8ToBase64String,
+} from '../../utils/codec';
 
 const Ed25519SignatureApp = () => {
   const [outputFormat, setOutputFormat] = useState('base64');

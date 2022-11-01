@@ -24,6 +24,3 @@
 # ide
 /.vscode
 /.idea
-
-
-dist/*

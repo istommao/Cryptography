@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Button, Input } from 'antd';
-import { Base64ToHex } from '../utils/codec';
+import { Base64ToHex } from '../../utils/codec';
 
 const { TextArea } = Input;
 
