@@ -17,5 +17,5 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run docs:build
-      - run: npm run docs:deploy
+      - run:  git config --global user.email "ci@codemax.com" &&  git config --global user.name "CodeMax" && npm run docs:deploy
 
