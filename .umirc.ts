@@ -7,8 +7,8 @@ export default defineConfig({
   outputPath: 'docs-dist',
   mode: 'site',
   // more config: https://d.umijs.org/config
-  publicPath: process.env.NODE_ENV === 'production' ? '/Cryptography/' : '/',
-  base: '/Cryptography',
+  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  base: '/',
   locales: [
     ['en-US', 'English'],
     ['zh-CN', '中文'],
