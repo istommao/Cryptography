@@ -19,6 +19,14 @@ import {
   Uint8ToBase64String,
 } from '../../utils/codec';
 
+const loadKeyFromString = (_key: string) => {
+  if (_key.length == 64) {
+    return _key;
+  } else {
+    return Base64ToHex(_key);
+  }
+};
+
 const Ed25519SignatureApp = () => {
   const [outputFormat, setOutputFormat] = useState('base64');
 
@@ -43,14 +51,21 @@ const Ed25519SignatureApp = () => {
     setPubkey(result.PublicKey);
   };
 
-  useEffect(() => {
-    if (!pubkey) {
-      clickGenerateHexKeyButton();
-    }
-  });
+  // useEffect(() => {
+  //   if (!pubkey) {
+  //     clickGenerateHexKeyButton();
+  //   }
+  // });
 
   const clickSigningButton = async () => {
-    const sigeBytes = await Ed25519Sign(privatekey, new TextEncoder().encode(originalText));
+    let sigeBytes;
+    try {
+      let _private_key = loadKeyFromString(privatekey);
+      sigeBytes = await Ed25519Sign(_private_key, new TextEncoder().encode(originalText));
+    } catch {
+      message.error('Invalid Private Key');
+      return;
+    }
 
     let signatureStr =
       outputFormat == 'base64' ? Uint8ToBase64String(sigeBytes) : ByteArrayToHexString(sigeBytes);
@@ -77,10 +92,18 @@ const Ed25519SignatureApp = () => {
     let signBytes =
       outputFormat === 'base64' ? Base64StringToUint8(signature) : HexStringToUint8Array(signature);
 
+    let _pub_key = loadKeyFromString(pubkey);
+    if (signBytes.length != 64) {
+      message.error('Invalid signature');
+      return;
+    }
+
     try {
-      isValid = await Ed25519Verify(pubkey, signBytes, new TextEncoder().encode(originalText));
-    } catch {
-      isValid = false;
+      isValid = await Ed25519Verify(_pub_key, signBytes, new TextEncoder().encode(originalText));
+    } catch (e) {
+      console.log(e);
+      message.error('Invalid PublicKey');
+      return;
     }
 
     if (isValid) {
@@ -100,9 +123,21 @@ const Ed25519SignatureApp = () => {
 
       <Paragraph>
         <Text>PublicKey:</Text>
-        <TextArea showCount value={pubkey} />
+        <TextArea
+          showCount
+          value={pubkey}
+          onChange={(e) => {
+            setPubkey(e.target.value);
+          }}
+        />
         <Text>Privatekey:</Text>
-        <TextArea showCount value={privatekey} />
+        <TextArea
+          showCount
+          onChange={(e) => {
+            setPrivatekey(e.target.value);
+          }}
+          value={privatekey}
+        />
       </Paragraph>
       <Paragraph>
         <TextArea
@@ -124,18 +159,28 @@ const Ed25519SignatureApp = () => {
           Verify signature
         </Button>
         &nbsp;&nbsp;
-        <Radio.Group defaultValue={outputFormat} buttonStyle="solid">
-          <Radio.Button value="base64" onClick={() => changeOutputFormat('base64')}>
-            Base64 Format
-          </Radio.Button>
-          <Radio.Button value="hex" onClick={() => changeOutputFormat('hex')}>
-            HEX Format
-          </Radio.Button>
-        </Radio.Group>
+        <div style={{ display: 'inline-block', 'margin-left': '30px' }}>
+          Format:&nbsp;
+          <Radio.Group defaultValue={outputFormat} buttonStyle="solid">
+            <Radio.Button value="base64" onClick={() => changeOutputFormat('base64')}>
+              Base64
+            </Radio.Button>
+            <Radio.Button value="hex" onClick={() => changeOutputFormat('hex')}>
+              HEX
+            </Radio.Button>
+          </Radio.Group>
+        </div>
       </Paragraph>
 
       <Paragraph>
-        <TextArea showCount placeholder="Signature" value={signature}></TextArea>
+        <TextArea
+          showCount
+          placeholder="Signature"
+          value={signature}
+          onChange={(e) => {
+            setSignature(e.target.value);
+          }}
+        ></TextArea>
       </Paragraph>
     </div>
   );

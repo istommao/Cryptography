@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { Button, Input } from 'antd';
+import { Button, Input, Typography } from 'antd';
+const { Paragraph } = Typography;
 
 const { TextArea } = Input;
 
@@ -31,13 +32,13 @@ const Ed25519App = () => {
     keyRenderData = (
       <div>
         <h2>Pubkey: </h2>
-        <p>
+        <Paragraph>
           <TextArea showCount value={pubkey} style={{ height: 120 }} />
-        </p>
+        </Paragraph>
         <h2>Privatekey: </h2>
-        <p>
+        <Paragraph>
           <TextArea showCount value={privatekey} style={{ height: 120 }} />
-        </p>
+        </Paragraph>
       </div>
     );
   } else {
