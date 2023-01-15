@@ -1,3 +1,5 @@
 import { X25519App } from './base';
 
-export { X25519App };
+import { X25519ShareKeyApp } from './sharekey';
+
+export { X25519App, X25519ShareKeyApp };

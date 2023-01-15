@@ -2,6 +2,19 @@
 import * as ed from '@noble/ed25519';
 import { Uint8ToBase64String } from '../../utils/codec';
 
+const GetShareKeyResult = async (privateKeyA: any, pubKeyB: any, format: string) => {
+  try {
+    const shared = await ed.getSharedSecret(privateKeyA, pubKeyB);
+    if (format === 'hex') {
+      return ByteArrayToHexString(shared);
+    } else {
+      return Uint8ToBase64String(shared);
+    }
+  } catch (e: any) {
+    return e.toString();
+  }
+};
+
 const HexStringToUint8Array = (hexString: string) => {
   if (hexString.length % 2 !== 0) {
     throw 'Invalid hexString';
@@ -55,4 +68,4 @@ function fromHexString(hex: any) {
   return bytes;
 }
 
-export { GenerateX25519KeyPair, ByteArrayToHexString, HexStringToUint8Array };
+export { GenerateX25519KeyPair, ByteArrayToHexString, HexStringToUint8Array, GetShareKeyResult };
