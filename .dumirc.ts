@@ -6,6 +6,10 @@ export default defineConfig({
   logo: 'https://t.codingcat.top/static/imgs/logo.png',
   outputPath: 'docs-dist',
   mode: 'site',
+  analytics: {
+    // 百度统计代码，配置后会启用
+    baidu: 'bd4f0366bf16042bba6c02072ead174d',
+  },
   // more config: https://d.umijs.org/config
   publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
   base: '/',
