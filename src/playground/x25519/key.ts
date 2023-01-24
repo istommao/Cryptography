@@ -4,7 +4,7 @@ import { Uint8ToBase64String } from '../../utils/codec';
 
 const GetShareKeyResult = async (privateKeyA: any, pubKeyB: any, format: string) => {
   try {
-    const shared = await ed.getSharedSecret(privateKeyA, pubKeyB);
+    const shared = await ed.curve25519.scalarMult(privateKeyA, pubKeyB);
     if (format === 'hex') {
       return ByteArrayToHexString(shared);
     } else {

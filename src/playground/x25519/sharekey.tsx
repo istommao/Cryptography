@@ -16,6 +16,9 @@ const X25519ShareKeyApp = () => {
   const [pubkeyB, setPubkeyB] = useState('');
   const [privatekeyB, setPrivatekeyB] = useState('');
 
+  const fromHexString = (hexString) =>
+    Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+
   const clickGetShareKeyButton = async (format: any) => {
     let PrivateB = privatekeyB;
     let PubA = pubkeyA;
