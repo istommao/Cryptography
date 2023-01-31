@@ -7,4 +7,6 @@ export { AESApp, AesEncryptionApp } from './playground/aes';
 
 export { MD5App, SHA1App, SHA2App, SHA3App } from './playground/hash';
 
+export { SM2App, SM3App, SM4App } from './playground/sm';
+
 import 'antd/dist/antd.less';

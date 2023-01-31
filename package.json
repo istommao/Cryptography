@@ -34,6 +34,7 @@
     "@noble/ed25519": "^1.7.1",
     "antd": "^4.23.6",
     "crypto-js": "^4.1.1",
+    "gm-crypto": "^0.1.8",
     "js-sha3": "^0.8.0",
     "react": "^18.0.0"
   },
@@ -41,6 +42,7 @@
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^27.0.3",
+    "@types/sm-crypto": "^0.3.0",
     "@umijs/fabric": "^2.8.1",
     "@umijs/plugin-analytics": "^0.2.3",
     "@umijs/test": "^3.0.5",
@@ -49,6 +51,7 @@
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
+    "sm-crypto": "^0.3.12",
     "yorkie": "^2.0.0"
   }
 }
