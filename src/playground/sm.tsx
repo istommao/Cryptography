@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 
-import { Button, Input } from 'antd';
+import { Button, Input, Typography, Radio } from 'antd';
 
 const { TextArea } = Input;
+const { Title, Paragraph, Text, Link } = Typography;
 
 const { SM2, SM3, SM4 } = require('gm-crypto');
 
 const SM4App = () => {
   // SM4
   // Block Cipher Algorithm.
+  const [SM4Payload, setSM4Payload] = useState('');
+  const [SM4CryptoData, setSM4CryptoData] = useState('');
+  const [SM4DecryptData, setSM4DecryptData] = useState('');
+  const [SM4Mode, setSM4Mode] = useState('CBC');
+  const [DataFormat, setDataFormat] = useState('hex');
 
   const key = '0123456789abcdeffedcba9876543210'; // Any string of 32 hexadecimal digits
-  const originalData = 'SM4 国标对称加密';
-
   /**
    * Block cipher modes:
    * - ECB: electronic codebook
@@ -21,40 +25,129 @@ const SM4App = () => {
 
   let encryptedData, decryptedData;
 
-  // ECB
-  encryptedData = SM4.encrypt(originalData, key, {
-    inputEncoding: 'utf8',
-    outputEncoding: 'base64',
-  });
-  decryptedData = SM4.decrypt(encryptedData, key, {
-    inputEncoding: 'base64',
-    outputEncoding: 'utf8',
-  });
+  const SM4ECBEncrypt = async () => {
+    // ECB
+    encryptedData = SM4.encrypt(originalData, key, {
+      inputEncoding: 'utf8',
+      outputEncoding: DataFormat,
+    });
 
-  // CBC
-  const iv = '0123456789abcdeffedcba9876543210'; // Initialization vector(any string of 32 hexadecimal digits)
-  encryptedData = SM4.encrypt(originalData, key, {
-    iv,
-    mode: SM2.constants.CBC,
-    inputEncoding: 'utf8',
-    outputEncoding: 'hex',
-  });
+    setSM4CryptoData(encryptedData);
+  };
 
-  decryptedData = SM4.decrypt(encryptedData, key, {
-    iv,
-    mode: SM2.constants.CBC,
-    inputEncoding: 'hex',
-    outputEncoding: 'utf8',
-  });
+  const SM4ECBDecrypt = async () => {
+    // ECB
+    decryptedData = SM4.decrypt(SM4CryptoData, key, {
+      inputEncoding: DataFormat,
+      outputEncoding: 'utf8',
+    });
 
-  const clickActionButton = async () => {};
+    setSM4DecryptData(decryptedData);
+  };
+
+  const SM4CBCEncrypt = async () => {
+    // CBC
+    const iv = '0123456789abcdeffedcba9876543210'; // Initialization vector(any string of 32 hexadecimal digits)
+
+    encryptedData = SM4.encrypt(SM4Payload, key, {
+      iv,
+      mode: SM2.constants.CBC,
+      inputEncoding: 'utf8',
+      outputEncoding: DataFormat,
+    });
+
+    setSM4CryptoData(encryptedData);
+  };
+
+  const SM4CBCDecrypt = async () => {
+    // CBC
+    const iv = '0123456789abcdeffedcba9876543210'; // Initialization vector(any string of 32 hexadecimal digits)
+
+    decryptedData = SM4.decrypt(SM4CryptoData, key, {
+      iv,
+      mode: SM2.constants.CBC,
+      inputEncoding: DataFormat,
+      outputEncoding: 'utf8',
+    });
+
+    setSM4DecryptData(decryptedData);
+  };
+
+  const clickEncryptButton = async () => {
+    if (SM4Mode == 'CBC') {
+      await SM4CBCEncrypt();
+    } else {
+      await SM4ECBEncrypt();
+    }
+  };
+
+  const clickDecryptButton = async () => {
+    if (SM4Mode == 'CBC') {
+      try {
+        await SM4CBCDecrypt();
+      } catch (error) {
+        setSM4DecryptData(error);
+      }
+    } else {
+      try {
+        await SM4ECBDecrypt();
+      } catch (error) {
+        setSM4DecryptData(error);
+      }
+    }
+  };
 
   return (
     <div>
       <h2>SM4</h2>
-      <Button type="primary" onClick={clickActionButton}>
-        Generate
+      <Paragraph>
+        <Radio.Group value={SM4Mode} onChange={(e) => setSM4Mode(e.target.value)}>
+          <Radio.Button value="CBC" checked={true}>
+            CBC
+          </Radio.Button>
+          <Radio.Button value="ECB">ECB</Radio.Button>
+        </Radio.Group>
+      </Paragraph>
+
+      <Paragraph>
+        <Radio.Group value={DataFormat} onChange={(e) => setDataFormat(e.target.value)}>
+          <Radio.Button value="hex" checked={true}>
+            hex
+          </Radio.Button>
+          <Radio.Button value="Base64">Base64</Radio.Button>
+        </Radio.Group>
+      </Paragraph>
+
+      <div style={{ height: '30px', marginTop: '12px' }}>
+        <TextArea
+          showCount
+          placeholder="payload"
+          value={SM4Payload}
+          style={{ height: 20 }}
+          onChange={(e) => setSM4Payload(e.target.value)}
+        />
+      </div>
+
+      <Button style={{ marginTop: '12px' }} type="primary" onClick={clickEncryptButton}>
+        Encrypt
       </Button>
+
+      <div style={{ height: '30px', marginTop: '12px' }}>
+        <TextArea showCount placeholder="CryptoData" value={SM4CryptoData} style={{ height: 20 }} />
+      </div>
+
+      <Button style={{ marginTop: '12px' }} type="primary" onClick={clickDecryptButton}>
+        Decrypt
+      </Button>
+
+      <div style={{ height: '30px', marginTop: '12px' }}>
+        <TextArea
+          showCount
+          placeholder="DecryptData"
+          value={SM4DecryptData}
+          style={{ height: 20 }}
+        />
+      </div>
     </div>
   );
 };
