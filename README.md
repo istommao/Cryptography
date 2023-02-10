@@ -1,12 +1,19 @@
 # cryptography
 
 ## TODO
+
+- [x] Hash MD5/SHA1/SHA2/SHA3
 - [x] SM2/SM3/SM4
+- [x] X25519/Ed25519
+- [x] RSA
+- [x] AES
+- [ ] secp256k1
 - [ ] HKDF
 - [ ] PBKDF2
 - [ ] OTP (TOTP/HOTP)
 
 ## Getting Started
+
 - 🌍 Online version crypto-online 
 - 💻 Desktop version CryptoBox 
 
