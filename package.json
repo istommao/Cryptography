@@ -32,10 +32,13 @@
   },
   "dependencies": {
     "@noble/ed25519": "^1.7.1",
+    "@noble/secp256k1": "^1.7.1",
     "antd": "^4.23.6",
     "crypto-js": "^4.1.1",
     "gm-crypto": "^0.1.8",
+    "js-crypto-hkdf": "^1.0.4",
     "js-sha3": "^0.8.0",
+    "keccak256": "^1.0.6",
     "react": "^18.0.0"
   },
   "devDependencies": {

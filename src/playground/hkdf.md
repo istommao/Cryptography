@@ -8,6 +8,9 @@ title: HKDF
 
 # HKDF
 
+<!-- https://asecuritysite.com/encryption/hkdf -->
+
+<!--
 ```js
 
 const GetAESGCMBytesKey = (raw_key, length, salt, info, hash) => {
@@ -42,4 +45,14 @@ let raw_key = await crypto.subtle.getRandomValues(new Uint8Array(128));
 
 let key = await GetAESGCMBytesKey(raw_key, 256, "", "", "SHA-384");
 console.log(key)
+```
+ -->
+
+https://github.com/junkurihara/jscu
+
+```tsx
+import React from 'react';
+import { HKDFApp } from 'cryptography';
+
+export default () => <HKDFApp />;
 ```

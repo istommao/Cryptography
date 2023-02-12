@@ -9,4 +9,8 @@ export { MD5App, SHA1App, SHA2App, SHA3App } from './playground/hash';
 
 export { SM2App, SM3App, SM4App } from './playground/sm';
 
+export { HKDFApp } from './playground/hkdf';
+
+export { Secp256k1App } from './playground/secp';
+
 import 'antd/dist/antd.less';
