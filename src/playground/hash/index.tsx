@@ -5,4 +5,6 @@ import { SHA3App } from './sha3';
 
 import { KeccakApp } from './keccak';
 
-export { MD5App, SHA1App, SHA2App, SHA3App, KeccakApp };
+import { RipemdApp } from './ripemd';
+
+export { MD5App, SHA1App, SHA2App, SHA3App, KeccakApp, RipemdApp };

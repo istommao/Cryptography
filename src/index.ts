@@ -5,7 +5,7 @@ export { X25519App, X25519ShareKeyApp } from './playground/x25519';
 
 export { AESApp, AesEncryptionApp } from './playground/aes';
 
-export { MD5App, SHA1App, SHA2App, SHA3App, KeccakApp } from './playground/hash';
+export { MD5App, SHA1App, SHA2App, SHA3App, KeccakApp, RipemdApp } from './playground/hash';
 
 export { SM2App, SM3App, SM4App } from './playground/sm';
 

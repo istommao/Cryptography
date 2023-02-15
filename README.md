@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [x] Hash MD5/SHA1/SHA2/SHA3/Keccak
+- [x] Hash MD5/SHA1/SHA2/SHA3/Keccak/Ripemd
 - [x] SM2/SM3/SM4
 - [x] X25519/Ed25519
 - [x] RSA
