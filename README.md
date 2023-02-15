@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [x] Hash MD5/SHA1/SHA2/SHA3
+- [x] Hash MD5/SHA1/SHA2/SHA3/Keccak
 - [x] SM2/SM3/SM4
 - [x] X25519/Ed25519
 - [x] RSA
@@ -14,19 +14,15 @@
 
 ## Getting Started
 
-- 🌍 Online version crypto-online 
-- 💻 Desktop version CryptoBox 
-
+- 🌍 Online version crypto-online
+- 💻 Desktop version CryptoBox
 
 ## Online Website
 
 - http://crypto-online.cn/
-- Or  https://istommao.github.io/Cryptography/
-
+- Or https://istommao.github.io/Cryptography/
 
 ![screenshot2.png](screenshot2.png)
-
-
 
 ## 💻 Desktop version CryptoBox
 
