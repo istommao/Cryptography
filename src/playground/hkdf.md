@@ -48,7 +48,7 @@ console.log(key)
 ```
  -->
 
-https://github.com/junkurihara/jscu
+<!-- https://github.com/junkurihara/jscu -->
 
 ```tsx
 import React from 'react';

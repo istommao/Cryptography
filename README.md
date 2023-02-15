@@ -8,7 +8,7 @@
 - [x] RSA
 - [x] AES
 - [ ] secp256k1
-- [ ] HKDF
+- [x] HKDF
 - [ ] PBKDF2
 - [ ] OTP (TOTP/HOTP)
 
